@@ -15,6 +15,11 @@ export default new vuetify({
 
 
     theme: {
-        dark: false, // Change to true if you want dark mode
+        dark: false,
+        light: {
+            buttonConfiramationColor :'',
+            buttonCancelColor : '' ,
+            backgroundColor : '#BC8A5F' ,
+        }, // Change to true if you want dark mode
       }
 })
