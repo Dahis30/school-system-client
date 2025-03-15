@@ -4,7 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </nav> -->
-   
+   <component :is="$route.meta.layout" />
     <router-view/>
   </v-app>
 </template>
