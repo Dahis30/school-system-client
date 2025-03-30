@@ -13,11 +13,11 @@ export const state = () => ({
   export const mutations = {
     setUser(state, user) {
       state.user = user;
-        localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(user));
     },
     clearUser(state) {
       state.user = null;
-      localStorage.removeItem("user");
+      localStorage.removeItem('user');
     },
   };
 

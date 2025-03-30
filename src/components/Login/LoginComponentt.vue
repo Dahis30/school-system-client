@@ -15,6 +15,8 @@
             <v-progress-linear v-if="loading"   color="#D4A276" indeterminate rounded height="6" ></v-progress-linear>           
             
 
+
+
             <!-- TODO : il faut que les champs etre obligatoires -->
             <v-form @submit.prevent="handleLogin()" class="mx-9 px-11 py-9">
               <v-row>
@@ -38,33 +40,6 @@
 import axios from 'axios';
 export default {
     name : "LoginComponentt",
-    methods:{
-      async handleLogin(){
-        try{
-          this.loading = true ;
-          // login for the first time  and stock the token in the local storage 
-          const response = await axios.post( '/login_check' , this.userInformation )
-          localStorage.setItem('token' , response?.data?.token)
-
-          // get the information of the current user and stock them in the local storage
-          const response2 = await axios.get( '/user-information' )
-          // console.log('curentUser : ' + JSON.parse(response2?.data?.result)) ;
-          // localStorage.setItem("user", JSON.stringify(response2?.data));
-          this.$store.dispatch('clearUserInformation');
-          const user = response2?.data?.result ;
-          this.$store.dispatch("saveUser", user);
-          this.loading = false
-
-
-        }
-        catch(error){
-          this.loading = false
-          // TODO : il faut afficher les messages aux utilisateures 
-          console.log('url : ' + error) ;
-        }
-
-      },
-    },
     data(){
       return{
         loading : false ,
@@ -77,7 +52,59 @@ export default {
             password : '',
            },
       }
+    },
+    methods:{
+      async handleLogin(){
+        try{
+          this.loading = true ;
+          let checkUser = await this.checkUserIfExist();
+          if(!checkUser){
+            this.loading = false
+            return false ;
+          } 
+          await this.getUserInfo();
+          this.loading = false
+        }
+        catch(error){
+          this.loading = false
+        }
+      },
 
+
+
+
+      async checkUserIfExist (){
+        try{
+          // login for the first time  and stock the token in the local storage 
+          const response = await axios.post( '/login_check' , this.userInformation )
+          await localStorage.removeItem('token');
+          await localStorage.setItem('token' , response?.data?.token)
+          return true ;
+        }
+        catch(error){
+          // TODO : il faut afficher les messages aux utilisateures 
+          console.log('url : ' + error) ;
+          return false ;
+        }
+      },
+
+
+
+      async getUserInfo (){
+        try{
+           // get the information of the current user and stock them in the local storage
+          const response = await axios.get( '/user-information' )
+          const user = response?.data ;
+          this.$store.dispatch('clearUserInformation');
+          this.$store.dispatch("saveUser", user);
+          this.userInformation = this.defaultUserInformation ;
+          this.$router.push('/');
+        }
+        catch(error){
+          // TODO : il faut afficher les messages aux utilisateures 
+          console.log('url : ' + error) ;
+        }
+      },
     },
 }
 </script>

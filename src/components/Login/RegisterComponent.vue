@@ -45,7 +45,7 @@
      </v-app>
    </template>
    
-   <script>
+<script>
    import axios from 'axios';
    export default {
        name : "RegisterComponent",
@@ -90,4 +90,4 @@
    
        },
    }
-   </script>
+</script>

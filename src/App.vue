@@ -1,11 +1,11 @@
 <template>
   <v-app id="app">
-    <!-- <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav> -->
-   <component :is="$route.meta.layout" />
-    <router-view/>
+
+      <template v-if="$route.meta.layout"><component :is="$route.meta.layout" /> </template>
+      <template v-else > <router-view/></template>
+        
+
+    
   </v-app>
 </template>
 
