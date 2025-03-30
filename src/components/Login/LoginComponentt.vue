@@ -98,7 +98,7 @@ export default {
           this.$store.dispatch('clearUserInformation');
           this.$store.dispatch("saveUser", user);
           this.userInformation = this.defaultUserInformation ;
-          this.$router.push('/');
+          this.$router.push('/formations');
         }
         catch(error){
           // TODO : il faut afficher les messages aux utilisateures 

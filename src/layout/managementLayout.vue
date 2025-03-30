@@ -5,11 +5,15 @@
 
             <v-card class="mx-1 my-1 pb-1 pt-0 rounded-xl" >
                 <v-row>
-                  <v-col class="" cols="3"> 
-                    <v-btn x-small  color="#D4A276" rounded @click="mini = !mini" v-if="!mini"> Cacher les menus </v-btn> 
-                    <v-btn  x-small color="#D4A276" rounded @click="mini = !mini" v-if="mini"> Afficher les menus </v-btn>
+                  <v-col class="pr-12" cols="1"> 
+
+                    <v-btn @click="mini = !mini"   fab dark x-small color="#D4A276">
+                      <i v-if="!mini" class="material-icons">menu_open</i>
+                      <i v-if="mini"  class="material-icons">list</i>  
+                    </v-btn>
+                    
                   </v-col>
-                  <v-col   cols="3">hi drower {{ drawer }}</v-col>
+                  <v-col   cols="5">hi drower {{ drawer }}</v-col>
                   <v-col   cols="3"> hi </v-col>
                   <v-col   cols="3"> hi </v-col>
                   
@@ -18,7 +22,7 @@
         
             <v-card>
                 <v-layout>
-                  <v-navigation-drawer   class="rounded-xl my-1"  :mini-variant.sync="mini" permanent color="#E7BC91"  >
+                  <v-navigation-drawer   class="rounded-xl my-1 ml-1"  :mini-variant.sync="mini" permanent color="#E7BC91"  >
                     <v-list dense >
                       <v-list-item class="px-2" >
                         <v-list-item-avatar>
@@ -36,14 +40,13 @@
                     <v-divider></v-divider>
 
                     <v-list dense nav rounded>
-                      <v-list-item link :to ="item.path" v-for="(item , id) in navigationItems"  :key="id" prepend-icon="mdi-folder" title="My Files" value="myfiles">
-                        <!-- <v-icon slot="prependIcon" large color="primary">mdi-star</v-icon> -->
-                        <v-list-item-icon>
-                          <v-icon>mdi-folder</v-icon>
-                        </v-list-item-icon>
+                      <v-list-item  link :to ="item.path" v-for="(item , id) in navigationItems"  :key="id" prepend-icon="mdi-folder"  value="myfiles">
+                        <v-list-item-icon    >
+                          <i class="material-icons">{{ item.icon }}</i>  </v-list-item-icon>
                         <v-list-item-title>{{ item.name }}</v-list-item-title>
                       </v-list-item>
                     </v-list>
+                    
 
 
                   </v-navigation-drawer>
