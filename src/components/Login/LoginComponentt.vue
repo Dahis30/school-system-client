@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
     name : "LoginComponentt",
     data(){
@@ -76,8 +75,7 @@ export default {
       async checkUserIfExist (){
         try{
           // login for the first time  and stock the token in the local storage 
-          const response = await axios.post( '/login_check' , this.userInformation )
-          await localStorage.removeItem('token');
+          const response = await this.$axios.post('/login_check', this.userInformation )     
           await localStorage.setItem('token' , response?.data?.token)
           return true ;
         }
@@ -93,7 +91,8 @@ export default {
       async getUserInfo (){
         try{
            // get the information of the current user and stock them in the local storage
-          const response = await axios.get( '/user-information' )
+          const response = await this.$axios.get('/user-information')
+          
           const user = response?.data ;
           this.$store.dispatch('clearUserInformation');
           this.$store.dispatch("saveUser", user);
