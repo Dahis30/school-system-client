@@ -11,15 +11,21 @@ export default [
     name: 'Formations',
     icon: 'auto_stories',
     component: FormationsView,
-    requirmentsForAccesToTheRoute: { requiresAuth: true, requiresRole: "admin" },
-    meta: {layout : managementLayout}
+    meta: {
+      layout : managementLayout ,
+      requiresAuth: true, 
+      requiresRoles: ["ROLE_ADMIN"] ,
+     }
   },
   {
     path: '/etudiants',
     name: 'Etudiants',
     icon: 'groups',
     component: EtudiantsView,
-    requirmentsForAccesToTheRoute: { requiresAuth: true, requiresRole: "admin" } ,
-    meta: {layout : managementLayout}
+    meta: {
+      layout : managementLayout ,
+      requiresAuth: true, 
+      requiresRoles: ["ROLE_ADMIN"] ,
+    }
   }
 ];

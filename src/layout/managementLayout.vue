@@ -11,7 +11,6 @@
                       <i v-if="!mini" class="material-icons">menu_open</i>
                       <i v-if="mini"  class="material-icons">list</i>  
                     </v-btn>
-                    
                   </v-col>
                   <v-col   cols="5">hi drower {{ drawer }}</v-col>
                   <v-col   cols="3"> hi </v-col>
@@ -65,14 +64,10 @@
 import schoolNavigation from '../router/routes/schoolNavigation.js'
 export default {
   computed: {
-    // Get the current dossier from the Vuex store
     user() {
       // get the current user : 
       let user = this.$store.getters.getUser ;
-      // let user = localStorage.getItem('user') ;
       user = JSON.parse(user)
-      // console.log('keeeeeeeeeeeeeyyyyyyys' + Object.keys(user))
-      // console.log('typeeeeeeeeooooooooooof ' +typeof (user))
       return user  ;
     },
   },
@@ -88,10 +83,10 @@ export default {
     }
   },
   methods:{
-    navigateToMenu(item){
-      this.$router.push(item.path);
+    // navigateToMenu(item){
+    //   this.$router.push(item.path);
 
-    },
+    // },
 
   },
 }
