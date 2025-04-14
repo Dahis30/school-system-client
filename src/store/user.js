@@ -19,6 +19,9 @@ export const state = () => ({
       state.user = null;
       localStorage.removeItem('user');
     },
+    clearToken(){
+      localStorage.removeItem('token');
+    }
   };
 
   export const actions = {
@@ -27,6 +30,9 @@ export const state = () => ({
     },
     clearUserInformation({ commit }) {
       commit("clearUser");
+    },
+    clearCurrentToken({ commit }) {
+      commit("clearCurrentToken");
     },
   };
   

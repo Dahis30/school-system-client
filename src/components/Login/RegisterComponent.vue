@@ -46,7 +46,6 @@
    </template>
    
 <script>
-   import axios from 'axios';
    export default {
        name : "RegisterComponent",
        methods:{
@@ -54,7 +53,7 @@
           try{
             this.loading = true
             let url = '/demande/inscription' ;
-            const response = await axios.post( url , this.userInformation )
+            const response = await this.$axios.post( url , this.userInformation)
             console.log(response) ;
             this.userInformation = this.defaultUserInformation;
             this.loading = false
