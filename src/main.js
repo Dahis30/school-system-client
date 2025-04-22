@@ -6,6 +6,7 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import './axiosConfiguration/axios' ;
 import axios from 'axios'
+import "./assets/reset.css";
 Vue.config.productionTip = false 
 
 //Pour utiliser Axios globalement dans tout le projet et pouvoir l'appeler via this.$axios (ex: this.$axios.get('/user-information')),

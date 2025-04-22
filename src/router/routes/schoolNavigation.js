@@ -14,18 +14,18 @@ export default [
     meta: {
       layout : managementLayout ,
       requiresAuth: true, 
-      requiresRoles: ["ROLE_ADMIN"] ,
+      requiresRoles: ["ROLE_USER"] ,
      }
   },
   {
     path: '/etudiants',
-    name: 'Etudiants',
+    name: 'Étudiants',
     icon: 'groups',
     component: EtudiantsView,
     meta: {
       layout : managementLayout ,
       requiresAuth: true, 
-      requiresRoles: ["ROLE_ADMIN"] ,
+      requiresRoles: ["ROLE_USER"] ,
     }
   }
 ];

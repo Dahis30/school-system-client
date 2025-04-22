@@ -11,9 +11,9 @@ vue.use(vuetify , {
 
 
 export default new vuetify({
-
-
-
+    icons: {
+        iconfont: 'md', // 👈 Use Material Design Icons
+    },
     theme: {
         dark: false,
         light: {

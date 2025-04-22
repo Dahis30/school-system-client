@@ -2,12 +2,14 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import schoolNavigation from './routes/schoolNavigation.js'
 import authRoutes from './routes/authRoutes.js'
+import adminRoutes from './routes/adminRoutes.js'
 
 Vue.use(VueRouter)
 
 const routes = [
   ...schoolNavigation ,
   ...authRoutes ,
+  ...adminRoutes,
 ]
 
 const router = new VueRouter({

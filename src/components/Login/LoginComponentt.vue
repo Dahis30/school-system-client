@@ -97,7 +97,11 @@ export default {
           this.$store.dispatch('clearUserInformation');
           this.$store.dispatch("saveUser", user);
           this.userInformation = this.defaultUserInformation ;
-          this.$router.push('/formations');
+          var menu = null ;
+          if(user.roles[0] == 'ROLE_ADMIN') menu = '/demandesInscription'
+          if(user.roles[0] == 'ROLE_USER') menu = '/formations'
+
+          this.$router.push(menu);
         }
         catch(error){
           // TODO : il faut afficher les messages aux utilisateures 
