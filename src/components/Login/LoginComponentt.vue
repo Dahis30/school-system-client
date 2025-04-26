@@ -12,7 +12,7 @@
                <h3 style="color:#8B5E34">Accéder à mon compte :</h3>
           </v-card>
           <v-card style="margin-top: 50px;"  class="mx-12 rounded-xl" >
-            <v-progress-linear v-if="loading"   color="#D4A276" indeterminate rounded height="6" ></v-progress-linear>           
+            <v-progress-linear v-if="loading"   color="subPrimary" indeterminate rounded height="6" ></v-progress-linear>           
             
 
 
@@ -21,13 +21,13 @@
             <v-form @submit.prevent="handleLogin()" class="mx-9 px-11 py-9">
               <v-row>
                 <v-col class="mx-0 my-0 px-0 py-0" cols =12>
-                  <v-text-field v-model="userInformation.email" label="Email" outlined dense shaped color="#D4A276" bg-color="#D4A276" ></v-text-field>
+                  <v-text-field v-model="userInformation.email" label="Email" outlined dense shaped color="subPrimary" bg-color="subPrimary" ></v-text-field>
                 </v-col>
                 <v-col  class="mx-0 my-0 px-0 py-0" cols =12>
-                  <v-text-field v-model="userInformation.password" label="Mot de passe" outlined dense shaped color="#D4A276" bg-color="#D4A276" ></v-text-field>
+                  <v-text-field v-model="userInformation.password" label="Mot de passe" outlined dense shaped color="subPrimary" bg-color="subPrimary" ></v-text-field>
                 </v-col>
               </v-row>
-              <v-btn type="submit" color="#D4A276" rounded > Login </v-btn>
+              <v-btn type="submit" color="subPrimary" rounded > Login </v-btn>
             </v-form>
           </v-card>
         </v-col>
@@ -97,7 +97,11 @@ export default {
           this.$store.dispatch('clearUserInformation');
           this.$store.dispatch("saveUser", user);
           this.userInformation = this.defaultUserInformation ;
-          this.$router.push('/formations');
+          var menu = null ;
+          if(user.roles[0] == 'ROLE_ADMIN') menu = '/demandesInscription'
+          if(user.roles[0] == 'ROLE_USER') menu = '/formations'
+
+          this.$router.push(menu);
         }
         catch(error){
           // TODO : il faut afficher les messages aux utilisateures 

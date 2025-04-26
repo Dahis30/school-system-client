@@ -15,11 +15,11 @@
                   <v-col   cols="5">hi drower {{ drawer }}</v-col>
                   <v-col   cols="3"> hi </v-col>
                   <v-col   cols="3"> 
-                    <v-switch  class="pa-0 ma-0" dense v-model="$vuetify.theme.dark"  >
-                         <template #label>
-                            <span style="color: var(--v-textColor-base);" >Mode Sombre</span>
-                         </template>
-                      </v-switch>  
+                        <v-switch  class="pa-0 ma-0" dense v-model="$vuetify.theme.dark"  >
+                           <template #label>
+                              <span style="color: var(--v-textColor-base);" >Mode Sombre</span>
+                           </template>
+                        </v-switch>
                   </v-col>
                   
                 </v-row>
@@ -57,7 +57,7 @@
                   </v-navigation-drawer>
 
                     <v-main class="" >
-                         <v-card class="card-style mx-2 my-1 rounded-xl" color="">
+                         <v-card class="card-style mx-2 my-0 rounded-xl" color="">
                              <router-view/>
                          </v-card>
                     </v-main>
@@ -67,7 +67,7 @@
 </template>
 <script>
 
-import schoolNavigation from '../router/routes/schoolNavigation.js'
+import adminRoutes from '../router/routes/adminRoutes.js'
 export default {
   computed: {
     user() {
@@ -78,13 +78,13 @@ export default {
     },
   },
   created(){
-    this.navigationItems = schoolNavigation ;
+    this.navigationItems = adminRoutes ;
 
   },
   data(){
     return{
       navigationItems : [] ,
-      mini : true ,
+      mini : false ,
       drawer: true,
     }
   },
