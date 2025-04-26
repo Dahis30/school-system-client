@@ -7,21 +7,27 @@
                 <v-row>
                   <v-col class="pr-12" cols="1"> 
 
-                    <v-btn @click="mini = !mini"   fab dark x-small color="#D4A276">
+                    <v-btn @click="mini = !mini"   fab dark x-small color="subPrimary">
                       <i v-if="!mini" class="material-icons">menu_open</i>
                       <i v-if="mini"  class="material-icons">list</i>  
                     </v-btn>
                   </v-col>
                   <v-col   cols="5">hi drower {{ drawer }}</v-col>
                   <v-col   cols="3"> hi </v-col>
-                  <v-col   cols="3"> hi </v-col>
+                  <v-col   cols="3"> 
+                        <v-switch  class="pa-0 ma-0" dense v-model="$vuetify.theme.dark"  >
+                           <template #label>
+                              <span style="color: var(--v-textColor-base);" >Mode Sombre</span>
+                           </template>
+                        </v-switch>
+                  </v-col>
                   
                 </v-row>
             </v-card>
         
             <v-card>
                 <v-layout>
-                  <v-navigation-drawer   class="rounded-xl my-1 ml-1"  :mini-variant.sync="mini" permanent color="#E7BC91"  >
+                  <v-navigation-drawer   class="rounded-xl my-1 ml-1"  :mini-variant.sync="mini" permanent color="primary"  >
                     <v-list dense >
                       <v-list-item class="px-2" >
                         <v-list-item-avatar>

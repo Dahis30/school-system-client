@@ -1,12 +1,22 @@
 /* global css here  */
 
 .v-data-table thead  {
-    background-color: #E7BC91 !important;
-    
+    background-color : var(--v-primary-base) !important;
+}
+
+
+.v-data-table{
+
+     border: 2px solid  var(--v-primary-base);
+     border-radius: 8px; /* Optional */
+     overflow: hidden; /* Keeps borders clean */
+
 }
 
 .v-data-table .loading  {
     /* background-color: #E7BC91 !important; */
-    color: red ;
+    color: #000000 ;
     
 }
+
+

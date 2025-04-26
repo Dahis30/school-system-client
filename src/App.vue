@@ -1,5 +1,7 @@
 <template>
   <v-app id="app">
+      <GlobalLoading ref="loadingComponent" />
+
 
       <template v-if="$route.meta.layout"><component :is="$route.meta.layout" /> </template>
       <template v-else > <router-view/></template>
@@ -8,7 +10,10 @@
 </template>
 <script>
 
+import GlobalLoading from  '@/components/Loading/GlobalLoading.vue'
+
 export default {
+  components : {  GlobalLoading},
   created(){
     this.isUserStillConnected ();
   },

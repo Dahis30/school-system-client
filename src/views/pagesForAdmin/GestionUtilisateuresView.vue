@@ -37,7 +37,7 @@
   import CardUser from  '@/components/ComponentsForAdmin/GestionUtilisateures/CardUser.vue'
   export default{
     name : 'GestionUtilisateuresView',
-    components : { CardUser, },
+    components : { CardUser},
     data(){
       return{
         users : [] ,
@@ -51,19 +51,25 @@
     methods:{
       async getUsers(){
         try{
-          this.loading = true ;
+           this.enableGlobalLoadingComponent()
           const response = await this.$axios.get('/users-information' )  
           this.users = response?.data?.users  
-          this.loading = false ;
           this.formatUsers();
+          this.disableGlobalLoadingComponent()
         }
         catch(error){
+          this.disableGlobalLoadingComponent()
           console.error( error) ;
-          this.loading = false ;
         }
       },
 
-      
+      enableGlobalLoadingComponent(){
+          this.$store.dispatch('enableGlobalLoading');
+      },
+      disableGlobalLoadingComponent(){
+          this.$store.dispatch('disableGlobalLoading');
+      },
+
       formatUsers (){
         var speceficUsers = [];
         var wantedUsersRow = [] ;
@@ -84,14 +90,14 @@
 
                                   if (count == 6 && !breakLoop){
                                     speceficUsers.push(wantedUsersRow) ;
-                                    console.log('wantedUsersRow : ' + wantedUsersRow)
+                                    // console.log('wantedUsersRow : ' + wantedUsersRow)
                                     wantedUsersRow = [] ;
                   
 
                                             if( (lenghtUsers - count2) <= 6  ){
-                                              console.log( 'idsProccessed: ' + idsProccessed )
+                                              // console.log( 'idsProccessed: ' + idsProccessed )
                                               let users = this.users.filter( (elt) => !idsProccessed.includes(elt.id) )
-                                              console.log( 'Le reste des users : ' + users)
+                                              // console.log( 'Le reste des users : ' + users)
                           
                                               users.forEach(
                                               (element) =>  ( wantedUsersRow.push(element) )
