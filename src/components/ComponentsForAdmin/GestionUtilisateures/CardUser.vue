@@ -1,9 +1,9 @@
 <template>
 
     <v-card outlined color="primary" class=" px-0 py-0" max-height="200" max-width="140"  >
-        <v-img  style="background-color: var(--v-primary-base) ;" cover max-width="100%" max-height="100%"  class="my-0 mx-0 " :src="require('@/assets/GestionUtilisateures/userMasculin.png')"></v-img>
-        <!-- <v-img cover max-width="140" max-height="180"  class="my-1 mx-1" :src="require('@/assets/GestionUtilisateures/userFeminin.png')"></v-img> -->
-        <!-- <v-divider class="mx-1 mb-1"></v-divider> -->
+        <v-img v-if="userInfo?.sexe== 'Homme'" style="background-color: var(--v-primary-base) ;" cover max-width="100%" max-height="100%"  class="my-0 mx-0 " :src="require('@/assets/GestionUtilisateures/userMasculin.png')"></v-img> 
+        <v-img v-if="userInfo?.sexe== 'Femme'" style="background-color: var(--v-primary-base) ;" cover max-width="100%" max-height="100%"  class="my-0 mx-0 " :src="require('@/assets/GestionUtilisateures/userFeminin.png')"></v-img>
+
         <v-card-item>
             <div class="my-0 text-subtitle-1">
                 

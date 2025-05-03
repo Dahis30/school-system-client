@@ -50,8 +50,8 @@ export default new vuetify({
             }, 
         },
 
-        light : false ,
-        dark : true ,
+        light : true ,
+        dark : false ,
       },
 
 

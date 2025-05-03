@@ -4,6 +4,7 @@
 // import FormationsView from '@/views/pagesForUse/FormationsView.vue'
 import DemandeInscriptionView from '@/views/pagesForAdmin/DemandeInscriptionView.vue'
 import GestionUtilisateuresView from '@/views/pagesForAdmin/GestionUtilisateuresView.vue'
+import TabeauDeBord from '@/views/pagesForAdmin/TabeauDeBord.vue'
 import adminLayout from '@/layout/adminLayout.vue'
 
 export default [
@@ -30,10 +31,22 @@ export default [
     }
   },
   {
-    path: '/gestionUtilisateuresView',
+    path: '/gestionUtilisateures',
     name: "La gestion des utilisateurs",
     icon: 'groups',
     component: GestionUtilisateuresView,
+    meta: {
+      layout : adminLayout ,
+      requiresAuth: true, 
+      requiresRoles: ["ROLE_ADMIN"] ,
+    }
+  },
+
+  {
+    path: '/TabeauDeBord',
+    name: "Tabeau de bord",
+    icon: 'groups',
+    component: TabeauDeBord,
     meta: {
       layout : adminLayout ,
       requiresAuth: true, 

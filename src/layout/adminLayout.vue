@@ -46,8 +46,9 @@
 
                     <v-list dense nav rounded>
                       <v-list-item  link :to ="item.path" v-for="(item , id) in navigationItems"  :key="id" prepend-icon="mdi-folder"  value="myfiles">
-                        <v-list-item-icon    >
-                          <i class="material-icons">{{ item.icon }}</i>  </v-list-item-icon>
+                        <v-list-item-icon>
+                          <v-icon>{{ item.icon }}</v-icon>
+                        </v-list-item-icon>
                         <v-list-item-title>{{ item.name }}</v-list-item-title>
                       </v-list-item>
                     </v-list>
