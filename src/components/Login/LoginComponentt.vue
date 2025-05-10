@@ -99,7 +99,11 @@ export default {
           this.userInformation = this.defaultUserInformation ;
           var menu = null ;
           if(user.roles[0] == 'ROLE_ADMIN') menu = '/demandesInscription'
-          if(user.roles[0] == 'ROLE_USER') menu = '/formations'
+          if(user.roles[0] == 'ROLE_USER') menu = '/CentresDeformation'
+
+          // Avant de basculer vers les autres pages, il faut vider les variables Vuex:
+          this.$store.dispatch('clearCentreDeFormation');
+          ////////////////////////////////////////////////////////////////////////////
 
           this.$router.push(menu);
         }

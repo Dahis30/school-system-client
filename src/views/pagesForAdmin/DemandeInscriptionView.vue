@@ -5,8 +5,8 @@
           <v-col cols="12" md="9" class="mx-0 px-0" >
               <v-alert  class=" py-1 my-0 mx-0 px-0" style="color : var(--v-textColor-base)" shaped dense dark color="primary" >Veuillez valider ou supprimer les demandes d'inscription selon la confirmation du client. </v-alert>
           </v-col>
-          <v-col cols="12" md="1" class="mx-3" > <v-btn @click="validerDemandes()" color="buttonConfiramationColor" small rounded > valider  <v-icon>verified</v-icon> </v-btn></v-col>
-          <v-col cols="12" md="1" class="mx-3" > <v-btn @click="supprimerDemandes()" color="buttonConfiramationColor" small rounded > supprimer  <v-icon>delete</v-icon> </v-btn></v-col>
+          <v-col cols="12" md="1" class="mx-3" > <v-btn @click="validerDemandes()" color="ConfiramationButtonColor" small rounded > valider  <v-icon>verified</v-icon> </v-btn></v-col>
+          <v-col cols="12" md="1" class="mx-3" > <v-btn @click="supprimerDemandes()" color="CancelButtonColor" small rounded > supprimer  <v-icon>delete</v-icon> </v-btn></v-col>
         </v-row>
       </v-container>
       <v-data-table :loading="loading" item-key="id" show-select dense v-model="selectedDemandes" :headers="headers" :items="demandes" class="elevation-3 mx-2 my-0 py-0" ></v-data-table>
@@ -21,12 +21,13 @@
         demandes : [] ,
         selectedDemandes : [],
         headers: [
-          { text: 'ID', align: 'start', value: 'id',},
-          { text: 'NOM', value: 'nom' },
-          { text: 'prenom', value: 'prenom' },
-          { text: 'email', value: 'email' },
-          { text: 'mot De Passe', value: 'motDePass' },
-          { text: 'numero de Telephone', value: 'numeroTelephone' },
+          { text: 'Id', align: 'start', value: 'id',},
+          { text: 'Nom', value: 'nom' },
+          { text: 'Prenom', value: 'prenom' },
+          { text: 'Sexe', value: 'sexe' },
+          { text: 'Email', value: 'email' },
+          { text: 'Mot de passe', value: 'motDePass' },
+          { text: 'Numero de Telephone', value: 'numeroTelephone' },
         ],
         loading : false ,
       }

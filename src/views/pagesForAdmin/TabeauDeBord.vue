@@ -2,6 +2,7 @@
     <div >
       <v-container fluid>
 
+        <!-- {{ users }} -->
        <template v-for="(item, rowIndex) in users">
         
             <v-row class="" :key="rowIndex" >
@@ -40,6 +41,7 @@
     data(){
       return{
         users : [] ,
+        counter : 0 ,
       }
     },
     created(){
@@ -49,15 +51,15 @@
     methods:{
       async getUsers(){
         try{
-            this.enableGlobalLoadingComponent()
-            const response = await this.$axios.get('/users-information' )  
-            this.users = response?.data?.users  
-            this.formatUsers();
-            this.disableGlobalLoadingComponent()
+           this.enableGlobalLoadingComponent()
+          const response = await this.$axios.get('/users-information' )  
+          this.users = response?.data?.users  
+          this.formatUsers();
+          this.disableGlobalLoadingComponent()
         }
         catch(error){
-            this.disableGlobalLoadingComponent()
-            console.error( error) ;
+          this.disableGlobalLoadingComponent()
+          console.error( error) ;
         }
       },
 
@@ -112,6 +114,10 @@
                         }
               }
         )
+
+
+
+        // foreach
 
         this.users = speceficUsers ;
 

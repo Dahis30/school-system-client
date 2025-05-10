@@ -3,23 +3,24 @@
         <v-app  >
 
 
-            <v-card class="mx-1 my-1 pb-1 pt-0 rounded-xl" >
+            <v-card class="mx-1 my-1 pb-1 pt-2 rounded-xl" >
                 <v-row>
-                  <v-col class="pr-12" cols="1"> 
+                  <v-col class=" py-0 my-0 pr-12 " cols="1"> 
 
-                    <v-btn @click="mini = !mini"   fab dark x-small color="subPrimary">
+                    <v-btn class="mx-0 my-1 pa-0" @click="mini = !mini"   fab dark x-small color="subPrimary">
                       <i v-if="!mini" class="material-icons">menu_open</i>
                       <i v-if="mini"  class="material-icons">list</i>  
                     </v-btn>
                   </v-col>
-                  <v-col   cols="5">hi drower {{ drawer }}</v-col>
-                  <v-col   cols="3"> hi </v-col>
-                  <v-col   cols="3"> 
-                        <v-switch  class="pa-0 ma-0" dense v-model="$vuetify.theme.dark"  >
-                           <template #label>
-                              <span style="color: var(--v-textColor-base);" >Mode Sombre</span>
-                           </template>
-                        </v-switch>
+                  <v-col class="py-0 my-0"   cols="8"> 
+                       <v-alert  class="mt-1 py-0 mb-0  px-0" style="color : var(--v-textColor-base)" shaped dense dark color="primary" >Vous pouvez gérer votre centre de formation ici. </v-alert>
+                  </v-col>
+                  <v-col class="py-0 my-0"   cols="3"> 
+                    <v-switch  class="pt-1 pb-0 px-0 ma-0" dense v-model="$vuetify.theme.dark"  >
+                         <template #label>
+                            <span style="color: var(--v-textColor-base);" >Mode Sombre</span>
+                         </template>
+                      </v-switch>  
                   </v-col>
                   
                 </v-row>
@@ -46,8 +47,9 @@
 
                     <v-list dense nav rounded>
                       <v-list-item  link :to ="item.path" v-for="(item , id) in navigationItems"  :key="id" prepend-icon="mdi-folder"  value="myfiles">
-                        <v-list-item-icon    >
-                          <i class="material-icons">{{ item.icon }}</i>  </v-list-item-icon>
+                        <v-list-item-icon>
+                          <v-icon>{{ item.icon }}</v-icon>
+                        </v-list-item-icon>
                         <v-list-item-title>{{ item.name }}</v-list-item-title>
                       </v-list-item>
                     </v-list>
@@ -57,7 +59,7 @@
                   </v-navigation-drawer>
 
                     <v-main class="" >
-                         <v-card class="card-style mx-2 my-0 rounded-xl" color="">
+                         <v-card class="card-style mx-2 my-1 rounded-xl" color="">
                              <router-view/>
                          </v-card>
                     </v-main>
@@ -84,7 +86,7 @@ export default {
   data(){
     return{
       navigationItems : [] ,
-      mini : false ,
+      mini : true ,
       drawer: true,
     }
   },
