@@ -32,7 +32,7 @@ export const state = () => ({
       commit("clearUser");
     },
     clearCurrentToken({ commit }) {
-      commit("clearCurrentToken");
+      commit("clearToken");
     },
   };
   

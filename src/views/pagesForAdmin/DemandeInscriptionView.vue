@@ -5,8 +5,8 @@
           <v-col cols="12" md="9" class="mx-0 px-0" >
               <v-alert  class=" py-1 my-0 mx-0 px-0" style="color : var(--v-textColor-base)" shaped dense dark color="primary" >Veuillez valider ou supprimer les demandes d'inscription selon la confirmation du client. </v-alert>
           </v-col>
-          <v-col cols="12" md="1" class="mx-3" > <v-btn @click="validerDemandes()" color="buttonConfiramationColor" small rounded > valider  <v-icon>verified</v-icon> </v-btn></v-col>
-          <v-col cols="12" md="1" class="mx-3" > <v-btn @click="supprimerDemandes()" color="buttonConfiramationColor" small rounded > supprimer  <v-icon>delete</v-icon> </v-btn></v-col>
+          <v-col cols="12" md="1" class="mx-3" > <v-btn @click="validerDemandes()" color="ConfiramationButtonColor" small rounded > valider  <v-icon>verified</v-icon> </v-btn></v-col>
+          <v-col cols="12" md="1" class="mx-3" > <v-btn @click="supprimerDemandes()" color="CancelButtonColor" small rounded > supprimer  <v-icon>delete</v-icon> </v-btn></v-col>
         </v-row>
       </v-container>
       <v-data-table :loading="loading" item-key="id" show-select dense v-model="selectedDemandes" :headers="headers" :items="demandes" class="elevation-3 mx-2 my-0 py-0" ></v-data-table>

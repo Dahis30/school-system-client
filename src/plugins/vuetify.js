@@ -20,12 +20,12 @@ export default new vuetify({
         },
         themes: {
             light: {
-                  primary: '#E7BC91',
+                  primary: '#D4A276',
                   subPrimary : '#D4A276' ,
                   textColor : '#000000',
                   BackgroundTextColor : '#ffffff',
-                  buttonConfiramationColor :'#E7BC91',
-                  buttonCancelColor : '#E7BC91' ,
+                  ConfiramationButtonColor :'#90C67C',
+                  CancelButtonColor : '#ef233c' ,
                   secondary: '#424242',
                   accent: '#82B1FF',
                   error: '#FF5252',
@@ -35,12 +35,12 @@ export default new vuetify({
             },
 
             dark: {
-              primary: '#E7BC91',
+              primary: '#D4A276',
               subPrimary : '#D4A276' ,
               textColor : '#ffffff',
               BackgroundTextColor : '#000000',
-              buttonConfiramationColor :'#E7BC91',
-              buttonCancelColor : '#E7BC91' ,
+              ConfiramationButtonColor :'#90C67C',
+              CancelButtonColor : '#ef233c' ,
               secondary: '#424242',
               accent: '#82B1FF',
               error: '#FF5252',
@@ -55,20 +55,6 @@ export default new vuetify({
       },
 
 
-    // themes: {
-    //     // dark: true,
-    //     light: {
-    //         buttonConfiramationColor :'',
-    //         buttonCancelColor : '' ,
-    //         backgroundColor : '#BC8A5F' ,
-    //     }, // Change to true if you want dark mode
-    //     dark: {
-    //         primary: '#BC8A5F' ,
-    //     },
-
-    //   },
-    // // light : false ,
-    // dark : true ,
 
 
 })
