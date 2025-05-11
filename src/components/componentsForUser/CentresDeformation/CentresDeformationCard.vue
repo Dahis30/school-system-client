@@ -1,6 +1,9 @@
 <template>
 
-    <!-- <template> -->
+  <div>
+
+  
+
       <v-card  class="mx-auto pb-0 pt-1 px-0"  max-width="380" >
     
         <v-img height="250" width="390" :src="require('@/assets/GestionCentresDeFormation/centreDeFormation.png')" ></v-img>
@@ -28,7 +31,7 @@
             <v-col cols="4" >
               <v-tooltip color="primary" bottom open-delay="200">
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn v-bind="attrs" v-on="on"  class="mx-2" fab dark small color="primary"  >
+                    <v-btn v-bind="attrs" v-on="on" @click="supprimer()" class="mx-2" fab dark small color="primary"  >
                       <v-icon dark>delete</v-icon>
                     </v-btn>
                   </template>
@@ -57,15 +60,16 @@
                   <span>Commencer la gestion de ce centre de formation.</span>
               </v-tooltip>
             </v-col>
-            
-
-
 
           </v-row>
         </v-card-actions>
 
-
       </v-card>
+      <ConfirmationDialog ref="confirmSuppression" @confirmed="confirmSuppresion()" :textConfirmation="textSupression" :textButtonConfirmation="'Supprimer'"  ></ConfirmationDialog>
+     
+      </div>
+    
+      
   </template>
   
   <script>
@@ -77,14 +81,25 @@
                         Required : true ,
                       },
     },
+    data (){
+      return{
+        textSupression : 'Êtes-vous sûr de vouloir supprimer ce centre de formation ?',
+
+      }
+    },
     methods : {
+      supprimer(){
+        this.$refs.confirmSuppression.openDialog();
+      },
+      async confirmSuppresion(){
+          const response = await this.$axios.delete('/centres-de-formation/' + this.centreInfo.id  )  
+          console.log(response);
+          this.$emit('centreDeleted') ;
+      },
       demarerCentre(){
-
-
         this.$store.dispatch('clearCentreDeFormation');
         this.$store.dispatch("saveCentreDeFormation" , JSON.stringify(this.centreInfo) );
-        console.log('current centre de formation : ' + this.$store.getters.getCentreDeFormation );
-
+        // console.log('current centre de formation : ' + this.$store.getters.getCentreDeFormation );
         this.$router.push('/formations');
 
       },

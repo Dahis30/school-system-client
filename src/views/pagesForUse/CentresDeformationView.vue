@@ -18,13 +18,13 @@
                 <v-row class="" :key="rowIndex" >
                   
                   <v-col cols="4"  > 
-                    <CentresDeformationCard v-if="item[0]"  :centreInfo="item[0]"  />
+                    <CentresDeformationCard @centreDeleted="getCentresDeFormation()" v-if="item[0]"  :centreInfo="item[0]"  />
                   </v-col>
                   <v-col cols="4"  > 
-                    <CentresDeformationCard v-if="item[1]" :centreInfo="item[1]"  />
+                    <CentresDeformationCard @centreDeleted="getCentresDeFormation()" v-if="item[1]" :centreInfo="item[1]"  />
                   </v-col>
                   <v-col  cols="4"  > 
-                    <CentresDeformationCard v-if="item[2]" :centreInfo="item[2]"  />
+                    <CentresDeformationCard @centreDeleted="getCentresDeFormation()" v-if="item[2]" :centreInfo="item[2]"  />
                   </v-col>   
                 </v-row> 
      
@@ -85,56 +85,51 @@
         formatCentresJson (){
             var speceficUsers = [];
             var wantedUsersRow = [] ;
-            var count = 0 ;
-            var count2 = 0 ;
             let lenghtUsers = this.centres.length;
-            let breakLoop = false ;
-            let idsProccessed = []
+         
     
-            this.centres.forEach(
-                  (item) => {
-        
-                          if(!breakLoop){
-                              count2++;
-                              wantedUsersRow.push(item) ;
-                              idsProccessed.push(item.id);
-                              count ++
-    
-                                      if (count == 3 && !breakLoop){
-                                        speceficUsers.push(wantedUsersRow) ;
-                                        // console.log('wantedUsersRow : ' + wantedUsersRow)
-                                        wantedUsersRow = [] ;
-                      
-    
-                                                if( (lenghtUsers - count2) <= 3  ){
-                                                  // console.log( 'idsProccessed: ' + idsProccessed )
-                                                  let centres = this.centres.filter( (elt) => !idsProccessed.includes(elt.id) )
-                                                  // console.log( 'Le reste des centres : ' + centres)
+            if (lenghtUsers < 3){
+              this.centres.forEach( (item)=> wantedUsersRow.push(item) )
+              speceficUsers.push(wantedUsersRow) ;
+            }
+            else {
+                var count = 0 ;
+                var count2 = 0 ;
+                let breakLoop = false ;
+                let idsProccessed = []
+                this.centres.forEach(
+                      (item) => {
+                              if(!breakLoop){
+                                  count2++;
+                                  wantedUsersRow.push(item) ;
+                                  idsProccessed.push(item.id);
+                                  count ++
+                                          if (count == 3 && !breakLoop){
+                                            speceficUsers.push(wantedUsersRow) ;
+                                            wantedUsersRow = [] ;
+                                                    if( (lenghtUsers - count2) <= 3  ){
+                                                      // console.log( 'idsProccessed: ' + idsProccessed )
+                                                      let centres = this.centres.filter( (elt) => !idsProccessed.includes(elt.id) )
+                                                      // console.log( 'Le reste des centres : ' + centres)
+                                  
+                                                      centres.forEach(
+                                                      (element) =>  ( wantedUsersRow.push(element) )
+                                                      )
+                                                      speceficUsers.push(wantedUsersRow) ;
+                                                      breakLoop = true ;
+                                                    }
+                                            count = 0
                               
-                                                  centres.forEach(
-                                                  (element) =>  ( wantedUsersRow.push(element) )
-                                                  )
-                                                  speceficUsers.push(wantedUsersRow) ;
-                                                  breakLoop = true ;
-                                                }
-    
-    
-                                        count = 0
-                          
-                                      }
-              
-                            }
-                  }
-            )
-    
+                                          }
+                  
+                                }
+                      }
+                )
+            }
+
             this.centres = speceficUsers ;
-    
-    
-    
+
         }
-
-
-
 
     }
 
