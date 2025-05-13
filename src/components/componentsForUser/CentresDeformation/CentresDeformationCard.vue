@@ -42,9 +42,10 @@
             <v-col cols="4" >
               <v-tooltip color="primary" bottom open-delay="200">
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn v-bind="attrs" v-on="on"  class="mx-2" fab dark small color="primary"  >
+                    <v-btn v-bind="attrs" v-on="on" @click="modifierCentre()" class="mx-2" fab dark small color="primary"  >
                       <v-icon dark>edit</v-icon>
                     </v-btn>
+                    <CentreDeFormationForm ref="formUpdate" @confirmed="loadDataInView()" :centreToEditInfo="centreInfo" :isForEdit="true" ></CentreDeFormationForm>
                   </template>
                   <span>Modifier ce centre de formation.</span>
               </v-tooltip>
@@ -73,8 +74,10 @@
   </template>
   
   <script>
+  import CentreDeFormationForm from '@/components/componentsForUser/CentresDeformation/CentreDeFormationForm.vue'
   export default {
     name: 'CardUser',
+    components : {CentreDeFormationForm},
     props: {
         centreInfo :  {
                         default: {},
@@ -94,13 +97,20 @@
       async confirmSuppresion(){
           const response = await this.$axios.delete('/centres-de-formation/' + this.centreInfo.id  )  
           console.log(response);
-          this.$emit('centreDeleted') ;
+          this.loadDataInView();
+      },
+      modifierCentre(){
+        this.$refs.formUpdate.openDialog();
       },
       demarerCentre(){
         this.$store.dispatch('clearCentreDeFormation');
         this.$store.dispatch("saveCentreDeFormation" , JSON.stringify(this.centreInfo) );
         // console.log('current centre de formation : ' + this.$store.getters.getCentreDeFormation );
         this.$router.push('/formations');
+
+      },
+      loadDataInView(){
+        this.$emit('loadData') ;
 
       },
     }

@@ -1,5 +1,5 @@
 <template>
-    <v-btn @click='userClicked()' color="CancelButtonColor" small rounded>
+    <v-btn @click='userClicked()'  color="subPrimary" outlined small rounded>
       {{textButton}}
       <v-icon v-if="icon">{{icon}}</v-icon> 
     </v-btn>
@@ -9,12 +9,12 @@
     name : 'CancelButton',  
     props : {
         textButton : {
-            default : '' ,
-            Required : true 
+            default : 'annuler' ,
+            // Required : true 
         },
         icon : {
             default : '' ,
-            Required : true 
+            // Required : true 
         }
     },
 
