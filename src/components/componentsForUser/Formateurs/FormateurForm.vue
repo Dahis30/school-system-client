@@ -11,10 +11,22 @@
                     <v-card-text>
                             <v-row>
                                 <v-col class="ma-0 pa-0" cols =12>
-                                  <v-text-field :rules="obligationRules" v-model="centreForm.nom" label="Nom" outlined dense shaped color="subPrimary" bg-color="subPrimary" ></v-text-field>
+                                  <v-text-field :rules="obligationRules" v-model="formateurForm.nom" label="Nom" outlined dense shaped color="subPrimary" bg-color="subPrimary" ></v-text-field>
                                 </v-col>
                                 <v-col  class="ma-0 pa-0" cols =12>
-                                  <v-text-field :rules="obligationRules" v-model="centreForm.adresse" label="Adresse" outlined dense shaped color="subPrimary" bg-color="subPrimary" ></v-text-field>
+                                  <v-text-field :rules="obligationRules" v-model="formateurForm.prenom" label="Prenom" outlined dense shaped color="subPrimary" bg-color="subPrimary" ></v-text-field>
+                                </v-col>
+                                <v-col  class="ma-0 pa-0" cols =12>
+                                  <v-autocomplete v-model="formateurForm.sexe" :items="sexes" label="Sexe" outlined shaped dense deletable-chips ></v-autocomplete>
+                                </v-col>
+                                 <v-col  class="ma-0 pa-0" cols =12>
+                                  <v-text-field type="number" :rules="obligationRules" v-model="formateurForm.numeroTelephone" label="Numero de telephone" outlined dense shaped color="subPrimary" bg-color="subPrimary" ></v-text-field>
+                                </v-col>
+                                 <v-col  class="ma-0 pa-0" cols =12>
+                                  <v-text-field :rules="obligationRules" v-model="formateurForm.email" label="Email" outlined dense shaped color="subPrimary" bg-color="subPrimary" ></v-text-field>
+                                </v-col>
+                                <v-col  class="ma-0 pa-0" cols =12>
+                                  <v-text-field :rules="obligationRules" v-model="formateurForm.adresse" label="Adresse" outlined dense shaped color="subPrimary" bg-color="subPrimary" ></v-text-field>
                                 </v-col>
                             </v-row>
                     </v-card-text>
@@ -30,10 +42,11 @@
 </template>
 <script>
   import obligationRules from '@/constants/vuetifyRules/obligationRules'
+  import sexes from '@/constants/sexes/sexes'
   export default{
-    name : 'CentreDeFormationForm',  
+    name : 'FormateurForm',  
     props : {
-        centreToEditInfo : {
+        centreId : {
             Required : false ,
         },
         isForEdit :{
@@ -44,20 +57,30 @@
     data (){
         return {
             isDialogOpen : false ,
-            centreForm : {
+            formateurToEditInfo : {},
+            formateurForm : {
                 id : '' ,
                 nom : '' ,
+                prenom : '' ,
+                sexe : '' ,
+                numeroTelephone : '',
+                email : '' ,
                 adresse : '' ,
             } ,
-            defaultCentreForm : {
+            defautFormateurForm : {
                 id : '' ,
                 nom : '' ,
+                prenom : '' ,
+                sexe : '' ,
+                numeroTelephone : '',
+                email : '' ,
                 adresse : '' ,
             } ,
         }
     },
     computed : {
         obligationRules(){ return obligationRules  } ,
+        sexes(){ return sexes } ,
         confirmationButtonText () {
             return this.isForEdit ? 'MODIFIER' : 'AJOUTER' ;
         }
@@ -68,23 +91,23 @@
     
     methods: {
         openDialog(){
-            this.centreForm = {...this.defaultCentreForm };
+            this.formateurForm = {...this.defautFormateurForm };
             this.isDialogOpen = true ;
-            if(this.isForEdit == true) this.centreForm = {...this.centreToEditInfo} ;
+            if(this.isForEdit == true) this.formateurForm = {...this.formateurToEditInfo} ;
         },
         closeDialog(){
             this.isDialogOpen = false ;
         },
         confirm(){
-            this.$emit('confirmed') ;
+            this.$emit('mustToLoadData') ;
             this.closeDialog() ;
         },
-        handleSubmit(){
+        async handleSubmit(){
             if(this.$refs.Form.validate()){
 
                 try{
                     this.enableGlobalLoadingComponent();
-                    this.isForEdit ? this.updateCentre() : this.createCentre();
+                    this.isForEdit ? await this.updateCentre() : await this.createFormateur();
                     this.disableGlobalLoadingComponent();
                     this.confirm()
                 }
@@ -98,17 +121,17 @@
         },
 
 
-        async createCentre(){
-            let url = '/centres-de-formation' ;
-            const response = await this.$axios.post( url , this.centreForm)
+        async createFormateur(){
+            let url = '/formateurs/' + this.centreId ;
+            const response = await this.$axios.post( url , this.formateurForm)
             console.log(response) ;
-            this.centreForm = {...this.defaultCentreForm };
+            this.formateurForm = {...this.defautFormateurForm };
         },
         async updateCentre(){
-            let url = '/centres-de-formation' ;
-            const response = await this.$axios.put( url , this.centreForm)
+            let url = '/formateurs' ;
+            const response = await this.$axios.put( url , this.formateurForm)
             console.log(response) ;
-            this.centreForm = {...this.defaultCentreForm };
+            this.formateurForm = {...this.defautFormateurForm };
 
         },
 

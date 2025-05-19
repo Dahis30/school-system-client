@@ -1,10 +1,22 @@
 import CentreDeformationMiddleware from '@/middlewares/CentreDeformation';
+import CentresDeformationView from '@/views/pagesForUse/CentresDeformationView.vue'
+
 import FormateursView from '@/views/pagesForUse/FormateursView.vue'
 import FormationsView from '@/views/pagesForUse/FormationsView.vue'
 import EtudiantsView from '@/views/pagesForUse/EtudiantsView.vue'
 import managementLayout from '@/layout/managementLayout.vue'
 
 export default [
+  {
+    path: '/centresDeformation',
+    name: 'Centres de formation',
+    icon: 'arrow_circle_left',
+    component: CentresDeformationView,
+    meta: {
+      requiresAuth: true, 
+      requiresRoles: ["ROLE_USER"] ,
+     }
+  },
   {
     path: '/formateurs',
     name: 'Formateurs',

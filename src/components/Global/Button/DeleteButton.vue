@@ -1,5 +1,5 @@
 <template>
-    <v-btn @click='userClicked()'  color="CancelButtonColor" outlined small rounded>
+    <v-btn @click='userClicked()'  color="CancelButtonColor" small rounded>
       {{textButton}}
       <v-icon v-if="icon">{{icon}}</v-icon> 
     </v-btn>

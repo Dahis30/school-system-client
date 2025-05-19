@@ -11,6 +11,8 @@ import ConfiramationButton from '@/components/Global/Button/ConfiramationButton'
 import CancelButton from '@/components/Global/Button/CancelButton'
 import AddButton from '@/components/Global/Button/AddButton'
 import DeleteButton from '@/components/Global/Button/DeleteButton'
+import UpdateOperation from '@/components/Global/Button/operationsButton/UpdateOperation.vue'
+import DeleteOperation from '@/components/Global/Button/operationsButton/DeleteOperation.vue'
 import ConfirmationDialog from '@/components/Global/Dialogs/ConfirmationDialog'
 
 
@@ -25,6 +27,8 @@ Vue.component('ConfiramationButton', ConfiramationButton)
 Vue.component('CancelButton', CancelButton)
 Vue.component('AddButton', AddButton)
 Vue.component('DeleteButton', DeleteButton)
+Vue.component('UpdateOperation', UpdateOperation)
+Vue.component('DeleteOperation', DeleteOperation)
 Vue.component('ConfirmationDialog', ConfirmationDialog)
 
 
