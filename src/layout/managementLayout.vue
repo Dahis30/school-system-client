@@ -26,7 +26,7 @@
                       </v-alert>
                   </v-col>
                   <v-col class="py-0 my-0"   cols="3"> 
-                    <v-switch  class="pt-1 pb-0 px-0 ma-0" dense v-model="$vuetify.theme.dark"  >
+                    <v-switch  class="pt-1 pb-0 px-0 ma-0" dense v-model="modeSombre"  >
                          <template #label>
                             <span style="color: var(--v-textColor-base);" >Mode Sombre</span>
                          </template>
@@ -95,21 +95,25 @@ export default {
   },
   created(){
     this.navigationItems = schoolNavigation ;
-
+    this.modeSombre = this.$vuetify.theme.dark ;
   },
   data(){
     return{
       navigationItems : [] ,
       mini : true ,
       drawer: true,
+      modeSombre : null ,
     }
   },
   methods:{
-    // navigateToMenu(item){
-    //   this.$router.push(item.path);
+  },
 
-    // },
-
+  watch :{
+    modeSombre(val){
+      if (val) this.$store.dispatch('enableModeSombre');
+      if(!val) this.$store.dispatch('disableModeSombre');
+      this.$vuetify.theme.dark = val ; 
+    }
   },
 }
 </script>

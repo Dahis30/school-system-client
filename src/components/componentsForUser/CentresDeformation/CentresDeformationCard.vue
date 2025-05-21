@@ -106,7 +106,7 @@
         this.$store.dispatch('clearCentreDeFormation');
         this.$store.dispatch("saveCentreDeFormation" , JSON.stringify(this.centreInfo) );
         // console.log('current centre de formation : ' + this.$store.getters.getCentreDeFormation );
-        this.$router.push('/formations');
+        this.$router.push('/formateurs');
 
       },
       loadDataInView(){
