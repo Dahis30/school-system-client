@@ -32,7 +32,13 @@ axios.defaults.baseURL = process.env.VUE_APP_BASE_URL ;
           location.reload();
         }else {
           // TODO : Il faut optimiser le message d'erreur (bad response) dans notre projet.
-          alert('An error occurred. Please try again later.')
+          if(JSON.stringify( error.response?.data?.error )){
+            alert( JSON.stringify( error.response?.data?.error ) ) 
+          }
+          else{ 
+              alert( JSON.stringify( "Une erreur est survenue lors de cette opération. " ) ) 
+
+          }
         }
   
   

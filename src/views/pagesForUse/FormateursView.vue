@@ -12,15 +12,43 @@
         </v-row>
       </v-container>
       <v-data-table :loading="loading"  dense  :headers="headers" :items="formateurs" class="elevation-3 mx-2 my-0 py-0" >
+     
+     
+        <template v-slot:[`item.nom`]="{ item }" >
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <span v-if="item?.nom.length > 10" v-bind="attrs" v-on="on" >{{item?.nom.substring(0, 10) }} ...</span>
+                <span v-else >{{item?.nom }}</span> 
+            </template>
+              <span>{{item?.nom }}</span>
+            </v-tooltip>
+        </template>
+
+
+        <template v-slot:[`item.prenom`]="{ item }" >
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <span v-if="item?.prenom.length > 10" v-bind="attrs" v-on="on" >{{item?.prenom.substring(0, 10) }} ...</span>
+                <span v-else >{{item?.prenom }}</span> 
+            </template>
+              <span>{{item?.prenom }}</span>
+            </v-tooltip>
+        </template>
+     
         <template  v-slot:[`item.operations`]="{ item }"  >
 
             <!-- la partie de modification -->
               <UpdateOperation @userClick="modifierFormateur(item)" />
-              <FormateurForm ref="modificationForm" :isForEdit="true" @mustToLoadData="obtenirFormateures()"></FormateurForm>
+              <FormateurForm ref="modificationForm" :isForEdit="true" @mustToLoadData="obtenirFormateures()" />
             <!--  -->
             <!-- la partie de suppresion -->
               <DeleteOperation @userClick="supprimerFormateur(item)" />
             <!--  -->
+
+              <AddOperation :spanText="'Ajouter formation'"  @userClick="AjouterFormation(item)" />
+              <AjouterFormatiomForm ref="formationsForm" :centreId="getCurrentCentre?.id" />
+
+              <ShowMoreOperation/>
         </template>
       </v-data-table>
 
@@ -32,22 +60,23 @@
   </template>
   <script>
   import FormateurForm from '@/components/componentsForUser/Formateurs/FormateurForm.vue'
+  import AjouterFormatiomForm from '@/components/componentsForUser/Formateurs/AjouterFormatiomForm.vue'
   export default{
     name : 'FormateursView',
-    components:{FormateurForm},
+    components:{FormateurForm , AjouterFormatiomForm},
     data(){
       return{
         formateurs : [] ,
         headers: [
-          { text: 'Id', align: 'start', value: 'id',},
+          // { text: 'Id', align: 'start', value: 'id',},
           { text: 'Nom', value: 'nom' , align: 'center', },
           { text: 'Prenom', value: 'prenom' , align: 'center', },
           { text: 'Sexe', value: 'sexe' , align: 'center', },
           { text: 'Adresse', value: 'adresse' , align: 'center', },
           { text: 'Email', value: 'email' , align: 'center',},
           { text: 'Numero de Telephone', value: 'numeroTelephone' , align: 'center', },
-          { text: 'créé le', value: 'createdAt' , align: 'center', },
-          { text: 'modifier le', value: 'updatedAt' , align: 'center', },
+          // { text: 'créé le', value: 'createdAt' , align: 'center', },
+          // { text: 'modifier le', value: 'updatedAt' , align: 'center', },
           { text: 'Opérations' , value: 'operations' , align: 'center',},
         ],
         loading : false ,
@@ -99,6 +128,11 @@
         const response = await this.$axios.delete('/formateurs/' + this.IdToDelete  )  
         console.log(response);
         await this.obtenirFormateures();
+      },
+      AjouterFormation(item){
+        this.$refs.formationsForm.formateurId = item?.id ;
+        this.$refs.formationsForm.openDialog();
+
       },
       
       enableGlobalLoadingComponent(){

@@ -6,12 +6,18 @@
                <v-icon v-bind="attrs" v-on="on" small  >delete</v-icon>
              </v-btn>
            </template>
-           <span>Supprimer</span>
+           <span>{{spanText}}</span>
      </v-tooltip>
 </template>
 <script>
 export default {
   name:'DeleteOperation',
+  props:{
+    spanText : {
+        default : 'Supprimer' ,
+        Required : false ,
+    }
+  },
   methods : {
         userClicked(){
             this.$emit('userClick')

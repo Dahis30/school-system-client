@@ -1,9 +1,9 @@
 <template>
 
-     <v-tooltip color="UpdateOperationColor" bottom open-delay="200">
+     <v-tooltip color="AddOperationColor" bottom open-delay="200">
            <template v-slot:activator="{ on, attrs }">
-             <v-btn v-bind="attrs" v-on="on" @click="userClicked()" class="my-0 mx-1 pa-0"  dark x-small color="UpdateOperationColor"  >
-               <v-icon v-bind="attrs" v-on="on" small  >edit</v-icon>
+             <v-btn v-bind="attrs" v-on="on" @click="userClicked()" class="my-0 mx-1 pa-0"  dark x-small color="AddOperationColor"  >
+               <v-icon v-bind="attrs" v-on="on" small  >add</v-icon>
              </v-btn>
            </template>
            <span>{{spanText}}</span>
@@ -11,10 +11,10 @@
 </template>
 <script>
 export default {
-  name:'UpdateOperation',
+  name:'AddOperation',
   props:{
     spanText : {
-        default : 'Modifier' ,
+        default : 'Ajouter' ,
         Required : false ,
     }
   },
