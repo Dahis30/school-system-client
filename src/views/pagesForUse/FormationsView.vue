@@ -3,10 +3,10 @@
       <v-container  class="py-0 ma-0"  color="">
         <v-row   class="px-0 mx-0 py-0 my-0">
           <v-col cols="10" md="8"    class="mx-0 px-0" >
-              <v-alert  class=" py-1 my-0 mx-0 px-0" style="color : var(--v-textColor-base)" shaped dense dark color="primary" >Veuillez valider ou supprimer les formateurs d'inscription selon la confirmation du client. </v-alert>
+              <v-alert  class=" py-1 my-0 mx-0 px-0" style="color : var(--v-textColor-base)" shaped dense dark color="primary" >Veuillez valider ou supprimer les formations selon votre besoin. </v-alert>
           </v-col>
           <v-col cols="2" md="1"   class="ml-13 pl-12" > 
-            <AddButton @userClick="ajouterFormation()" :textButton="'Ajouter une formation'" :icon="'data_saver_on'" />
+            <AddButton @userClick="ajouterFormation()" :textButton="'Ajouter formation'" :icon="'data_saver_on'" />
             <FormationForm ref="ajoutForm" :centreId="getCurrentCentre?.id" @mustToLoadData="obtenirFormations()"></FormationForm>
           </v-col>
         </v-row>
@@ -61,7 +61,7 @@
           { text: 'Titre', value: 'titre' , align: 'center', },
           { text: 'Description', value: 'description' , align: 'center', },
           { text: 'créé le', value: 'createdAt' , align: 'center', },
-          { text: 'modifier le', value: 'updatedAt' , align: 'center', },
+          { text: 'modifier le', value: 'updatedAt' , align: 'center',divider: true, },
           { text: 'Opérations' , value: 'operations' , align: 'center',},
         ],
         loading : false ,

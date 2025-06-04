@@ -70,27 +70,21 @@
                                 </v-tooltip>
                             </template>
 
-
-
                             <template  v-slot:[`item.operations`]="{ item }"  >
                                 <!-- la partie de suppresion -->
                                   <DeleteOperation @userClick="supprimerFormationAuFormateur(item)" />
                                 <!--  -->
-
                             </template>
 
                         </v-data-table>
 
-
                         <!-- Ce dialogue sert uniquement à confirmer la suppression d’une formation au formateur. -->
                         <ConfirmationDialog ref="dialogSuppression" @confirmed="confirmSuppression()" :textConfirmation="textSupression" :textButtonConfirmation="'Supprimer'"  ></ConfirmationDialog>  
     
-
                     </v-card-text>
                 
             </v-card>
       </v-dialog>
-
 </template>
 <script>
   import obligationRules from '@/constants/vuetifyRules/obligationRules'

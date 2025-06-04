@@ -3,10 +3,10 @@
       <v-container  class="py-0 ma-0"  color="">
         <v-row   class="px-0 mx-0 py-0 my-0">
           <v-col cols="10" md="8"    class="mx-0 px-0" >
-              <v-alert  class=" py-1 my-0 mx-0 px-0" style="color : var(--v-textColor-base)" shaped dense dark color="primary" >Veuillez valider ou supprimer les formateurs d'inscription selon la confirmation du client. </v-alert>
+              <v-alert  class=" py-1 my-0 mx-0 px-0" style="color : var(--v-textColor-base)" shaped dense dark color="primary" >Veuillez valider ou supprimer les formateurs selon votre besoin. </v-alert>
           </v-col>
           <v-col cols="2" md="1"   class="ml-13 pl-12" > 
-            <AddButton @userClick="ajouterFormateur()" :textButton="'Ajouter un formateur'" :icon="'data_saver_on'" />
+            <AddButton @userClick="ajouterFormateur()" :textButton="'Ajouter formateur'" :icon="'data_saver_on'" />
             <FormateurForm ref="ajoutForm" :centreId="getCurrentCentre?.id" @mustToLoadData="obtenirFormateures()"></FormateurForm>
           </v-col>
         </v-row>
@@ -45,10 +45,15 @@
               <DeleteOperation @userClick="supprimerFormateur(item)" />
             <!--  -->
 
+            <!-- cette partie pour gerer les formations de formateur -->
               <AddOperation :spanText="'Ajouter formation'"  @userClick="AjouterFormation(item)" />
               <AjouterFormatiomForm ref="formationsForm" :centreId="getCurrentCentre?.id" />
+            <!--  -->
 
-              <ShowMoreOperation/>
+            <!-- cette partier permet d'afficher les details d'un formateur -->
+              <ShowMoreOperation @userClick="afficherFormateur(item)" />
+              <detailFormateur ref="detailFormateurDialog"  />
+            <!--  -->
         </template>
       </v-data-table>
 
@@ -61,22 +66,20 @@
   <script>
   import FormateurForm from '@/components/componentsForUser/Formateurs/FormateurForm.vue'
   import AjouterFormatiomForm from '@/components/componentsForUser/Formateurs/AjouterFormatiomForm.vue'
+  import detailFormateur from '@/components/componentsForUser/Formateurs/detailFormateur.vue'
   export default{
     name : 'FormateursView',
-    components:{FormateurForm , AjouterFormatiomForm},
+    components:{FormateurForm , AjouterFormatiomForm , detailFormateur},
     data(){
       return{
         formateurs : [] ,
         headers: [
-          // { text: 'Id', align: 'start', value: 'id',},
           { text: 'Nom', value: 'nom' , align: 'center', },
           { text: 'Prenom', value: 'prenom' , align: 'center', },
           { text: 'Sexe', value: 'sexe' , align: 'center', },
           { text: 'Adresse', value: 'adresse' , align: 'center', },
           { text: 'Email', value: 'email' , align: 'center',},
-          { text: 'Numero de Telephone', value: 'numeroTelephone' , align: 'center', },
-          // { text: 'créé le', value: 'createdAt' , align: 'center', },
-          // { text: 'modifier le', value: 'updatedAt' , align: 'center', },
+          { text: 'Numero de Telephone', value: 'numeroTelephone' , align: 'center', divider: true, },
           { text: 'Opérations' , value: 'operations' , align: 'center',},
         ],
         loading : false ,
@@ -128,6 +131,9 @@
         const response = await this.$axios.delete('/formateurs/' + this.IdToDelete  )  
         console.log(response);
         await this.obtenirFormateures();
+      },
+      afficherFormateur(formateur){
+        this.$refs.detailFormateurDialog.openDialog(formateur);
       },
       AjouterFormation(item){
         this.$refs.formationsForm.formateurId = item?.id ;
