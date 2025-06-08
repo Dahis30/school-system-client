@@ -57,12 +57,11 @@
       return{
         formations : [] ,
         headers: [
-          { text: 'Id', align: 'start', value: 'id',},
-          { text: 'Titre', value: 'titre' , align: 'center', },
-          { text: 'Description', value: 'description' , align: 'center', },
-          { text: 'créé le', value: 'createdAt' , align: 'center', },
-          { text: 'modifier le', value: 'updatedAt' , align: 'center',divider: true, },
-          { text: 'Opérations' , value: 'operations' , align: 'center',},
+          { text: 'Titre', value: 'titre' , width: '25%' , align: 'center', },
+          { text: 'Description', value: 'description' , width: '40%' , align: 'center', },
+          { text: 'créé le', value: 'createdAt' , width: '10%' , align: 'center', },
+          { text: 'modifier le', value: 'updatedAt' , width: '10%' , align: 'center',divider: true, },
+          { text: 'Opérations' , value: 'operations' , width: '15%', align: 'center',},
         ],
         loading : false ,
         IdToDelete : null ,

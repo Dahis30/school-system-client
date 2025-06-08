@@ -14,7 +14,13 @@
                                   <v-text-field :rules="obligationRules" v-model="formationForm.titre" label="Titre" outlined dense shaped color="subPrimary" bg-color="subPrimary" ></v-text-field>
                                 </v-col>
                                 <v-col  class="ma-0 pa-0" cols =12>
-                                  <v-text-field v-model="formationForm.description" label="Description" outlined dense shaped color="subPrimary" bg-color="subPrimary" ></v-text-field>
+                                    <v-textarea v-model="formationForm.description" label="Description" outlined dense shaped color="subPrimary" bg-color="subPrimary" >
+                                      <template v-slot:label>
+                                        <div>
+                                          Description <small>(facultatif)</small>
+                                        </div>
+                                      </template>
+                                    </v-textarea>
                                 </v-col>
                             </v-row>
                     </v-card-text>
