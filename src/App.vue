@@ -16,6 +16,7 @@ export default {
   components : {  GlobalLoading},
   created(){
     this.isUserStillConnected ();
+    this.handlModeSombre() ;
   },
   methods:{
     async isUserStillConnected(){
@@ -39,6 +40,12 @@ export default {
           this.$store.dispatch('clearUserInformation');
           if(this.$route.path != '/login' && this.$route.path != '/register' ) this.$router.push('/login');
         }
+    },
+    
+    handlModeSombre(){
+      const modeSombre = this.$store.getters.getModeSombre ;
+      if(modeSombre == 'true') this.$vuetify.theme.dark = true     
+      if(modeSombre == 'false') this.$vuetify.theme.dark = false             
     }
   }
 }

@@ -16,7 +16,7 @@
                        <v-alert  class="mt-1 py-0 mb-0  px-0" style="color : var(--v-textColor-base)" shaped dense dark color="primary" >Vous pouvez gérer votre centre de formation ici. </v-alert>
                   </v-col>
                   <v-col class="py-0 my-0"   cols="3"> 
-                    <v-switch  class="pt-1 pb-0 px-0 ma-0" dense v-model="$vuetify.theme.dark"  >
+                    <v-switch  class="pt-1 pb-0 px-0 ma-0" dense v-model="modeSombre"  >
                          <template #label>
                             <span style="color: var(--v-textColor-base);" >Mode Sombre</span>
                          </template>
@@ -58,8 +58,8 @@
 
                   </v-navigation-drawer>
 
-                    <v-main class="" >
-                         <v-card class="card-style mx-2 my-1 rounded-xl" color="">
+                    <v-main class="mr-0" :style="mainStyle">
+                         <v-card class="card-style mx-1 my-1 rounded-xl" color="">
                              <router-view/>
                          </v-card>
                     </v-main>
@@ -78,9 +78,20 @@ export default {
       user = JSON.parse(user)
       return user  ;
     },
+    mainStyle() {
+      // Largeur fixe selon l'état du drawer
+      const drawerWidth = this.mini ? 56 : 260; // 56px pour mini, 300px pour normal
+      return {
+        width: `calc(100vw - ${drawerWidth + 16}px)`, // 16px pour les marges
+        maxWidth: `calc(100vw - ${drawerWidth + 16}px)`,
+        marginRight: '0',
+        transition: 'width 0.2s ease' ,
+      }
+    }
   },
   created(){
     this.navigationItems = adminRoutes ;
+    this.modeSombre = this.$vuetify.theme.dark ;
 
   },
   data(){
@@ -88,14 +99,17 @@ export default {
       navigationItems : [] ,
       mini : true ,
       drawer: true,
+      modeSombre : null ,
     }
   },
   methods:{
-    // navigateToMenu(item){
-    //   this.$router.push(item.path);
-
-    // },
-
+  },
+  watch :{
+    modeSombre(val){
+      if (val) this.$store.dispatch('enableModeSombre');
+      if(!val) this.$store.dispatch('disableModeSombre');
+      this.$vuetify.theme.dark = val ; 
+    }
   },
 }
 </script>

@@ -1,0 +1,1 @@
+export default [ v => !!v || 'ce champ est obligatoire' ] ;

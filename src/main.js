@@ -7,8 +7,16 @@ import vuetify from './plugins/vuetify'
 import './axiosConfiguration/axios' ;
 import axios from 'axios'
 import "./assets/reset.css";
-import ConfiramationButton from '@/components/Global/ConfiramationButton'
-import CancelButton from '@/components/Global/CancelButton'
+import ConfiramationButton from '@/components/Global/Button/ConfiramationButton'
+import CancelButton from '@/components/Global/Button/CancelButton'
+import AddButton from '@/components/Global/Button/AddButton'
+import DeleteButton from '@/components/Global/Button/DeleteButton'
+import UpdateOperation from '@/components/Global/Button/operationsButton/UpdateOperation.vue'
+import DeleteOperation from '@/components/Global/Button/operationsButton/DeleteOperation.vue'
+import AddOperation from '@/components/Global/Button/operationsButton/AddOperation.vue'
+import ShowMoreOperation from '@/components/Global/Button/operationsButton/ShowMoreOperation.vue'
+import ConfirmationDialog from '@/components/Global/Dialogs/ConfirmationDialog.vue'
+import PrivateLoading from '@/components/Loading/PrivateLoading.vue'
 
 
 Vue.config.productionTip = false 
@@ -20,6 +28,17 @@ Vue.prototype.$axios = axios
 // "Ici, nous allons essayer de définir des components globalement afin de pouvoir les utiliser ensuite dans toutes les vues du projet, sans avoir besoin de les importer à chaque fois.
 Vue.component('ConfiramationButton', ConfiramationButton)
 Vue.component('CancelButton', CancelButton)
+Vue.component('AddButton', AddButton)
+Vue.component('DeleteButton', DeleteButton)
+Vue.component('UpdateOperation', UpdateOperation)
+Vue.component('DeleteOperation', DeleteOperation)
+Vue.component('AddOperation', AddOperation)
+Vue.component('ShowMoreOperation', ShowMoreOperation)
+Vue.component('ConfirmationDialog', ConfirmationDialog)
+Vue.component('PrivateLoading', PrivateLoading)
+
+
+
 
 
 new Vue({

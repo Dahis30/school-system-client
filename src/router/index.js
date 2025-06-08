@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import schoolNavigation from './routes/userRoutes/schoolNavigation.js'
-import centresDeformation from './routes/userRoutes/centresDeformation.js'
 import authRoutes from './routes/authRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 
@@ -9,7 +8,6 @@ Vue.use(VueRouter)
 
 const routes = [
   ...schoolNavigation ,
-  ...centresDeformation ,
   ...authRoutes ,
   ...adminRoutes,
 ]

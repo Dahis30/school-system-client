@@ -1,20 +1,21 @@
 <template>
-    <v-btn @click='userClicked()' color="CancelButtonColor" small rounded>
+    <v-btn @click='userClicked()' color="subPrimary" type="submit" small rounded>
       {{textButton}}
       <v-icon v-if="icon">{{icon}}</v-icon> 
     </v-btn>
+
 </template>
 <script>
   export default{
-    name : 'CancelButton',  
+    name : 'ConfiramationButton',  
     props : {
         textButton : {
-            default : '' ,
-            Required : true 
+            default : 'confirmer' ,
+            // Required : true 
         },
         icon : {
             default : '' ,
-            Required : true 
+            // Required : true 
         }
     },
 
