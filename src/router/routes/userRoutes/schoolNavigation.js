@@ -1,10 +1,12 @@
-import CentreDeformationMiddleware from '@/middlewares/CentreDeformation';
-import CentresDeformationView from '@/views/pagesForUse/CentresDeformationView.vue'
+import managementLayout from '@/layout/managementLayout.vue'
 
+import CentreDeformationMiddleware from '@/middlewares/CentreDeformation';
+
+import CentresDeformationView from '@/views/pagesForUse/CentresDeformationView.vue'
 import FormateursView from '@/views/pagesForUse/FormateursView.vue'
 import FormationsView from '@/views/pagesForUse/FormationsView.vue'
 import EtudiantsView from '@/views/pagesForUse/EtudiantsView.vue'
-import managementLayout from '@/layout/managementLayout.vue'
+import AbonnementView from '@/views/pagesForUse/AbonnementView.vue'
 
 export default [
   {
@@ -46,6 +48,18 @@ export default [
     name: 'Étudiants',
     icon: 'school',
     component: EtudiantsView,
+    meta: {
+      layout : managementLayout ,
+      requiresAuth: true, 
+      requiresRoles: ["ROLE_USER"] ,
+      middleware: CentreDeformationMiddleware
+    }
+  },
+  {
+    path: '/abonnements',
+    name: 'Abonnements',
+    icon: 'assignment',
+    component: AbonnementView,
     meta: {
       layout : managementLayout ,
       requiresAuth: true, 
