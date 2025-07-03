@@ -12,22 +12,22 @@
         </v-row>
       </v-container>
       <v-data-table :loading="loading"  dense  :headers="headers" :items="etudiants" class="elevation-3 mx-2 my-0 py-0" >
-        <template v-slot:[`item.titre`]="{ item }" >
+        <template v-slot:[`item.nomComplet`]="{ item }" >
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
-                <span v-if="item?.titre.length > 35" v-bind="attrs" v-on="on" >{{item?.titre.substring(0, 35) }} ...</span>
-                <span v-else >{{item?.titre }}</span> 
+                <span v-if="item?.nomComplet.length > 28" v-bind="attrs" v-on="on" >{{item?.nomComplet.substring(0, 28) }} ...</span>
+                <span v-else >{{item?.nomComplet }}</span> 
             </template>
-              <span>{{item?.titre }}</span>
+              <span>{{item?.nomComplet }}</span>
             </v-tooltip>
         </template>
-        <template v-slot:[`item.description`]="{ item }" >
+        <template v-slot:[`item.nomTuteur`]="{ item }" >
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
-                <span v-if="item?.description.length > 50" v-bind="attrs" v-on="on" >{{item?.description.substring(0, 50) }} ...</span>
-                <span v-else >{{item?.description }}</span> 
+                <span v-if="item?.nomTuteur.length > 28" v-bind="attrs" v-on="on" >{{item?.nomTuteur.substring(0, 28) }} ...</span>
+                <span v-else >{{item?.nomTuteur }}</span> 
             </template>
-              <span>{{item?.description }}</span>
+              <span>{{item?.nomTuteur }}</span>
             </v-tooltip>
         </template>
         <template  v-slot:[`item.operations`]="{ item }"  >
@@ -38,6 +38,11 @@
             <!--  -->
             <!-- la partie de suppresion -->
               <DeleteOperation @userClick="supprimerFormation(item)" />
+            <!--  -->
+
+            <!-- cette partier permet d'afficher les details d'un formateur -->
+              <ShowMoreOperation @userClick="afficherEtudiant(item)" />
+              <detailEtudiant ref="detailEtudiantDialog"  />
             <!--  -->
         </template>
       </v-data-table>
@@ -50,23 +55,19 @@
   </template>
   <script>
   import EtudiantForm from '@/components/componentsForUser/Etudiants/EtudiantForm.vue'
+  import detailEtudiant from '@/components/componentsForUser/Etudiants/detailEtudiant.vue'
   export default{
     name : 'EtudiantsView',
-    components:{EtudiantForm},
+    components:{EtudiantForm , detailEtudiant},
     data(){
       return{
         etudiants : [] ,
         headers: [
-          { text: 'nomComplet', value: 'nomComplet' , width: '15%' , align: 'center', },
-          { text: 'numeroTelephone', value: 'numeroTelephone' , width: '10%' , align: 'center', },
-          { text: 'nomTuteur', value: 'nomTuteur' , width: '15%' , align: 'center', },
-          { text: 'numeroTelephoneTuteur', value: 'numeroTelephoneTuteur' , width: '10%' , align: 'center', },
-          { text: 'niveauScolaire', value: 'niveauScolaire' , width: '10%' , align: 'center', },
-          { text: 'groupe', value: 'groupe' , width: '10%' , align: 'center', },
-          { text: 'adresse', value: 'adresse' , width: '15%' , align: 'center', },
-        // { text: 'créé le', value: 'createdAt' , width: '10%' , align: 'center', },
-        //  { text: 'modifier le', value: 'updatedAt' , width: '5%' , align: 'center',divider: true, },
-          { text: 'Opérations' , value: 'operations' , width: '15%', align: 'center',},
+          { text: 'Nom complet' , value: 'nomComplet' ,  width: '25%' , align: 'center', },
+          { text: 'Telephone' , value: 'numeroTelephone' ,  width: '8%' , align: 'center', },
+          { text: 'Nom du tuteur' , value: 'nomTuteur' , width: '25%' , align: 'center'},
+          { text: 'Telephone du tuteur' , value: 'numeroTelephoneTuteur' , width: '7%' , align: 'center', divider: true,},
+          { text: 'Opérations' , value: 'operations' , width: '35%', align: 'center',},
         ],
         loading : false ,
         IdToDelete : null ,
@@ -118,7 +119,9 @@
         console.log(response);
         await this.obtenirFormations();
       },
-      
+      afficherEtudiant(formateur){
+        this.$refs.detailEtudiantDialog.openDialog(formateur);
+      },
       enableGlobalLoadingComponent(){
           this.$store.dispatch('enableGlobalLoading');
       },

@@ -3,13 +3,13 @@
      <v-dialog v-model="isDialogOpen" transition="dialog-top-transition" max-width="1100" >
             <v-card>
                 <v-toolbar  dense dark color="primary">
-                        <v-toolbar-title>Les détails du formateur</v-toolbar-title>
+                        <v-toolbar-title>Les détails d'etudiant</v-toolbar-title>
                         <v-spacer/>
                         <v-btn icon dark @click="closeDialog()"><v-icon>close</v-icon></v-btn>
                 </v-toolbar>
                 <v-card-text class="py-6">
                     
-                    <v-row v-for="(value, key) in formateurInfo" :key="key">
+                    <v-row v-for="(value, key) in etudiantInfo" :key="key">
                       <v-col cols="3">
                         <span class="textInfo">{{getFieldLabel(key)}}</span>
                       </v-col>
@@ -37,21 +37,21 @@
 </template>
 <script>
 export default {
-    name : 'detailFormateur',
+    name : 'detailEtudiant',
     data(){
         return{
             isDialogOpen : false ,
-            formateurInfo : {},
+            etudiantInfo : {},
         }
     },
     methods : {
         
-        openDialog(formateurInfoParametre){
+        openDialog(etudiantInfoParametre){
             // Exclure l'id et ne garder que les champs à afficher
-            const { id, ...filtered } = formateurInfoParametre
+            const { id, ...filtered } = etudiantInfoParametre
             console.log(id)
-            this.formateurInfo = {}  ;
-            this.formateurInfo = {...filtered}
+            this.etudiantInfo = {}  ;
+            this.etudiantInfo = {...filtered}
             this.isDialogOpen = true ;
         },
         closeDialog(){
@@ -61,14 +61,15 @@ export default {
 
         getFieldLabel(key) {
           const labels = {
-            nom: 'Nom',
-            prenom: 'Prénom',
-            sexe: 'Sexe',
+            nomComplet: 'Nom complet',
+            numeroTelephone: 'Numéro de téléphone',
+            nomTuteur: 'Nom du tuteur',
             adresse: 'Adresse',
-            email: 'Email',
-            numeroTelephone: 'Numéro de Téléphone',
+            numeroTelephoneTuteur: 'Numéro de téléphone du tuteur',
+            niveauScolaire: 'Niveau scolaire',
+            groupe: 'Groupe',
             createdAt: 'Créé le',
-            updatedAt: 'Modifié le'
+            updatedAt: 'Modifié le',
           }
           return labels[key] || key
         },
