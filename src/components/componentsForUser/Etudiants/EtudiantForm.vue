@@ -53,7 +53,7 @@
 <script>
   import obligationRules from '@/constants/vuetifyRules/obligationRules'
   export default{
-    name : 'FormationForm',  
+    name : 'EtudiantForm',  
     props : {
         centreId : {
             Required : false ,
